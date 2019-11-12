@@ -1,0 +1,59 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(124, 76, 163);
+    back
+}
+#title-bar {
+border: 1px black solid;
+margin-bottom: 20px;
+background-color: rgba(204, 204, 204, 0.87);
+}
+#results {
+    border: 1px black solid;
+    width: fit-content;
+    float: left;
+    background-color: rgba(204, 204, 204, 0.87);
+    
+
+}
+#results li {
+    background-color: rgb(245, 245, 245);
+    border: black 1px solid;
+    border: black 1px solid;
+    border: black 1px solid;
+    margin-left: -15px;
+    margin-right: -15px;
+    padding-left: 5px;
+    padding-right: 10px;
+}
+#item-section {
+    background-color: rgba(204, 204, 204, 0.87);
+    border: 1px black solid;
+    width: 73%;
+    margin-bottom: 20px;
+    float: right;
+}
+#item-section img {
+    border: 1px black solid;
+    align-content: center;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-right: 20px;
+    
+}
+#description {
+    background-color: rgba(204, 204, 204, 0.87);
+   float: right;
+    border: 1px black solid;
+    width: 903px;
+    margin-right: 100px;
+}
+#description p {
+    background-color: rgb(245, 245, 245);
+    border: black 1px solid;
+    margin-left: 10px;
+    margin-right: -10px;
+    padding-left: 10px;
+    padding-right: -10px;
+}
