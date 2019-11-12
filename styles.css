@@ -8,6 +8,9 @@ border: 1px black solid;
 margin-bottom: 20px;
 background-color: rgba(204, 204, 204, 0.87);
 }
+#title-bar h1 {
+    margin-left: 100px;
+}
 #results {
     border: 1px black solid;
     width: fit-content;
