@@ -102,16 +102,13 @@ console.log(itemStorage)
 
 
 function renderList() {
-    // var currentObjName = itemStorage[i].name;
-    // var currentObjVotes = itemStorage[i].votes;
-    // var currentObjViews = itemStorage[i].views;
     var results = document.getElementById('result-list');
     for (var i = 0; i < itemStorage.length; i++) {
         var currentObjName = itemStorage[i].name;
         var currentObjVotes = itemStorage[i].votes;
         var currentObjViews = itemStorage[i].views;
         var li = document.createElement('li');
-        li.textContent = `Item ${i}: ${currentObjName} Votes: ${currentObjVotes} Views: ${currentObjViews}`;
+        li.textContent = `Item ${i + 1}: ${currentObjName} Votes: ${currentObjVotes} Views: ${currentObjViews}`;
         results.append(li);
     }
 }
@@ -138,6 +135,9 @@ function clickManager(event) {
     } else {
         alert('Thank you \n Your data will be used \n to enhance user experience!');
         renderList();
+        makeChart();
+        
+
 
     }
 
@@ -158,23 +158,30 @@ imageTwo.addEventListener('click', clickManager);
 imageThree.addEventListener('click', clickManager);
 
 
+function makeChart() {
+    var chartLabels = [];
+    var voteData = [];
+    for (var i = 0; i < itemStorage.length; i++) {
+        chartLabels.push(itemStorage[i].name);
+        voteData.push(itemStorage[i].votes);
+    }
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'bar',
 
+        // The data for our dataset
+        data: {
+            labels: chartLabels,
+            datasets: [{
+                label: 'Product Votes',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: voteData
+            }]
+        },
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// create a constructor
-// create an arrayh of alll images needed
-//create a function/method 
-// use an empty array to set which 3 images will be displayed
+        // Configuration options go here
+        options: {}
+    });
+}

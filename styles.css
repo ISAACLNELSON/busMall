@@ -14,15 +14,15 @@ background-color: rgba(204, 204, 204, 0.87);
 #results {
     border: 1px black solid;
     width: fit-content;
-    float: left;
+    /* float: left; */
     background-color: rgba(204, 204, 204, 0.87);
-    
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 400px;
 
 }
 #results li {
     background-color: rgb(245, 245, 245);
-    border: black 1px solid;
-    border: black 1px solid;
     border: black 1px solid;
     margin-left: -15px;
     margin-right: -15px;
@@ -32,9 +32,12 @@ background-color: rgba(204, 204, 204, 0.87);
 #item-section {
     background-color: rgba(204, 204, 204, 0.87);
     border: 1px black solid;
-    width: 73%;
-    margin-bottom: 20px;
-    float: right;
+    width: fit-content;
+    margin-left: 10%;
+    padding-bottom: 30px;
+    height: 400px;
+    align-content: center;
+    padding-right: 30px;
 }
 #item-section img {
     border: 1px black solid;
@@ -42,8 +45,17 @@ background-color: rgba(204, 204, 204, 0.87);
     margin-left: 20px;
     margin-bottom: 20px;
     margin-top: 20px;
-    margin-right: 20px;
     
+    
+}
+#chart {
+    width: 60%;
+}
+canvas {
+    background-color: bisque;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 30px;
 }
 #description {
     background-color: rgba(204, 204, 204, 0.87);
