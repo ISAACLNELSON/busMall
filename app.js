@@ -1,18 +1,13 @@
-//BROAD
-// make  a bunch of objects with pictures and some values like how many times it was viewed and clicked. 
-// put all those objects in a list
-// create a function that chooses three different random images and displays them on the screen
 
 
-//SLIGHTLY MORE SPECIFIC
-//Use a constructor to make all these imageObjects
-//push constructed objects into an array
+/* TO DO FOR TODAY
+use local storage
+- send data to localStorage after 25 clicks
+- make a load condition that asks if local storage is empty, if it is empty then load normally. 
+if it has data stored load using that same data
 
-
-//TO DO FOR TODAY
-
-//when you view an img this.views++
-//
+*/
+var ITEM_DATA = 'itemData';
 var itemStorage = [];
 var clickCount = 0;
 const MAX_CLICK_COUNTER = 25;
@@ -67,42 +62,82 @@ var Item = function (name, picture) {
         this.votes++;
     }
 
-    //constructors render method
     this.render = function (domReference) {
-        domReference.src = picture;
+        domReference.src = this.picture;
     }
-    itemStorage.push(this)
+
+    this.loadData = function (data) {
+        this.name = data.name;
+        this.picture = data.picture;
+        this.votes = data.votes;
+        this.views = data.views;
+    }
+}
+
+if (localStorage.getItem(ITEM_DATA) === null) {
+    //constructed items
+    var bag = new Item('Bag', './images/bag.jpg');
+    var banana = new Item('Banana', './images/banana.jpg');
+    var bathroom = new Item('Bathroom', './images/bathroom.jpg');
+    var boots = new Item('Boots', './images/boots.jpg');
+    var breakfast = new Item('Breakfast', './images/breakfast.jpg');
+    var bubblegum = new Item('Bubblegum', './images/bubblegum.jpg');
+    var chair = new Item('Chair', './images/chair.jpg');
+    var cthulhu = new Item('Cthulhu', './images/cthulhu.jpg');
+    var dogDuck = new Item('Dog-Duck', './images/dog-duck.jpg');
+    var dragon = new Item('Dragon', './images/dragon.jpg');
+    var pen = new Item('Pen', './images/pen.jpg');
+    var petSweep = new Item('Pet-Sweep', './images/pet-sweep.jpg');
+    var scissors = new Item('Scissors', './images/scissors.jpg');
+    var shark = new Item('Shark', './images/shark.jpg');
+    var sweep = new Item('Sweep', './images/sweep.png');
+    var tauntaun = new Item('Tauntaun', './images/tauntaun.jpg');
+    var unicorn = new Item('Unicorn', './images/unicorn.jpg');
+    var usb = new Item('USB', './images/usb.gif');
+    var waterCan = new Item('Water-Can', './images/water-can.jpg');
+    var wineGlass = new Item('Wine-Glass', './images/wine-glass.jpg');
+
+
+    itemStorage.push(bag);
+    itemStorage.push(banana);
+    itemStorage.push(bathroom);
+    itemStorage.push(boots);
+    itemStorage.push(breakfast);
+    itemStorage.push(bubblegum);
+    itemStorage.push(chair);
+    itemStorage.push(cthulhu);
+    itemStorage.push(dogDuck);
+    itemStorage.push(dragon);
+    itemStorage.push(pen);
+    itemStorage.push(petSweep);
+    itemStorage.push(scissors);
+    itemStorage.push(shark);
+    itemStorage.push(sweep);
+    itemStorage.push(tauntaun);
+    itemStorage.push(unicorn);
+    itemStorage.push(usb);
+    itemStorage.push(waterCan);
+    itemStorage.push(wineGlass);
+} else {
+    var jsonData = localStorage.getItem(ITEM_DATA);
+    var data = JSON.parse(jsonData);
+
+    for (var i = 0; i < data.length; i++) {
+        var newItem = new Item('', '');
+
+        newItem.loadData(data[i]);
+        itemStorage.push(newItem);
+    }
 }
 
 
-//constructed items
-var bag = new Item('Bag', './images/bag.jpg');
-var banana = new Item('Banana', './images/banana.jpg');
-var bathroom = new Item('Bathroom', './images/bathroom.jpg');
-var boots = new Item('Boots', './images/boots.jpg');
-var breakfast = new Item('Breakfast', './images/breakfast.jpg');
-var bubblegum = new Item('Bubblegum', './images/bubblegum.jpg');
-var chair = new Item('Chair', './images/chair.jpg');
-var cthulhu = new Item('Cthulhu', './images/cthulhu.jpg');
-var dogDuck = new Item('Dog-Duck', './images/dog-duck.jpg');
-var dragon = new Item('Dragon', './images/dragon.jpg');
-var pen = new Item('Pen', './images/pen.jpg');
-var petSweep = new Item('Pet-Sweep', './images/pet-sweep.jpg');
-var scissors = new Item('Scissors', './images/scissors.jpg');
-var shark = new Item('Shark', './images/shark.jpg');
-var sweep = new Item('Sweep', './images/sweep.png');
-var tauntaun = new Item('Tauntaun', './images/tauntaun.jpg');
-var unicorn = new Item('Unicorn', './images/unicorn.jpg');
-var usb = new Item('USB', './images/usb.gif');
-var waterCan = new Item('Water-Can', './images/water-can.jpg');
-var wineGlass = new Item('Wine-Glass', './images/wine-glass.jpg');
 
-console.log(itemStorage)
 
 
 
 function renderList() {
     var results = document.getElementById('result-list');
+    results.innerHTML = '';
     for (var i = 0; i < itemStorage.length; i++) {
         var currentObjName = itemStorage[i].name;
         var currentObjVotes = itemStorage[i].votes;
@@ -131,16 +166,17 @@ function clickManager(event) {
         var clickedItem = select3ItemsAndRender()[itemIndex];
         clickedItem.markClick();
 
-
+        select3ItemsAndRender();
     } else {
-        alert('Thank you \n Your data will be used \n to enhance user experience!');
+        saveItemDataToLocalStorage();
         renderList();
         makeChart();
-        
-
-
     }
 
+    function saveItemDataToLocalStorage(){
+        var jsonData = JSON.stringify(itemStorage);
+        localStorage.setItem(ITEM_DATA, jsonData);
+    }
 
 
 
@@ -159,6 +195,7 @@ imageThree.addEventListener('click', clickManager);
 
 
 function makeChart() {
+
     var chartLabels = [];
     var voteData = [];
     for (var i = 0; i < itemStorage.length; i++) {
@@ -175,8 +212,8 @@ function makeChart() {
             labels: chartLabels,
             datasets: [{
                 label: 'Product Votes',
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgb(202, 42, 42)',
+                borderColor: 'red',
                 data: voteData
             }]
         },
